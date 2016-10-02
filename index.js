@@ -64,17 +64,6 @@ module.exports = function (options) {
         });
         callback();
     }, function (callback) {
-        var combinedFilesByBlock = {};
-        _.map(parsedKeysets, function (keyset) {
-            var nameBlock = keyset.entity.block;
-            var filePath = keyset.path;
-            var lang = getLangFormFile(filePath);
-            if (!_.get(combinedFilesByBlock, [nameBlock, lang])) {
-                _.set(combinedFilesByBlock, [nameBlock, lang], []);
-            }
-            combinedFilesByBlock[nameBlock][lang].push(filePath);
-        });
-
         var keysetsByBlock = _.groupBy(parsedKeysets, function (keyset) {
             return _.get(keyset, 'entity.block');
         });
